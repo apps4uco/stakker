@@ -3,7 +3,11 @@ use std::cmp::Ordering;
 use std::collections::btree_map::Entry;
 use std::collections::BTreeMap;
 use std::mem;
-use std::time::{Duration, Instant};
+use std::time::Duration;
+#[cfg(not(target_family = "wasm"))]
+use std::time::Instant;
+#[cfg(target_family = "wasm")]
+use web_time::Instant;
 
 // TODO: Switch to N-ary Heap for storing (WrapTime, slot-index),
 // e.g. Octonary heap, and use slots for normal timers as well as

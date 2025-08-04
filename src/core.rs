@@ -12,7 +12,11 @@ use std::collections::{HashMap, VecDeque};
 use std::fmt::Arguments;
 use std::mem;
 use std::ops::{Deref, DerefMut};
-use std::time::{Duration, Instant, SystemTime};
+use std::time::Duration;
+#[cfg(not(target_family = "wasm"))]
+use std::time::{Instant, SystemTime};
+#[cfg(target_family = "wasm")]
+use web_time::{Instant, SystemTime};
 
 /// The external interface to the actor runtime
 ///

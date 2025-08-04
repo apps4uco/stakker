@@ -693,7 +693,10 @@ macro_rules! after_aux {
 macro_rules! at {
     ( $inst:expr, $($x:tt)+ ) => {{
         $crate::COVERAGE!(at_0);
+        #[cfg(not(target_family = "wasm"))]
         let inst: std::time::Instant = $inst;
+        #[cfg(target_family = "wasm")]
+        let inst: web_time::Instant = $inst;
         $crate::generic_call!(at_aux (inst) access_core; $($x)+) // Error? Try [actor, core] form
     }};
 }
@@ -745,7 +748,10 @@ macro_rules! timer_max {
     ( $var:expr, $inst:expr, $($x:tt)+ ) => {{
         $crate::COVERAGE!(timer_max_0);
         let var: &mut $crate::MaxTimerKey = $var;
+        #[cfg(not(target_family = "wasm"))]
         let inst: std::time::Instant = $inst;
+        #[cfg(target_family = "wasm")]
+        let inst: web_time::Instant = $inst;
         $crate::generic_call!(timer_max_aux (var, inst) access_core; $($x)+) // Error? Try [actor, core] form
     }};
 }
@@ -799,7 +805,10 @@ macro_rules! timer_min {
     ( $var:expr, $inst:expr, $($x:tt)+ ) => {{
         $crate::COVERAGE!(timer_min_0);
         let var: &mut $crate::MinTimerKey = $var;
+        #[cfg(not(target_family = "wasm"))]
         let inst: std::time::Instant = $inst;
+        #[cfg(target_family = "wasm")]
+        let inst: web_time::Instant = $inst;
         $crate::generic_call!(timer_min_aux (var, inst) access_core; $($x)+) // Error? Try [actor, core] form
     }};
 }

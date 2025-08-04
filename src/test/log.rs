@@ -90,7 +90,10 @@ test_fn!(
     #[cfg(feature = "logger")]
     fn logger() {
         use std::fmt::Arguments;
+        #[cfg(not(target_family = "wasm"))]
         use std::time::Instant;
+        #[cfg(target_family = "wasm")]
+        use web_time::Instant;
 
         let now = Instant::now();
         let mut stakker = Stakker::new(now);

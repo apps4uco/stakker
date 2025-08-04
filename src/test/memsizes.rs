@@ -4,7 +4,10 @@
 //! have the allocation size show up in valgrind.
 
 use crate::{actor_new, ret_nop, ret_panic, ret_to, ActorOwn, Stakker, StopCause, CX};
+#[cfg(not(target_family = "wasm"))]
 use std::time::Instant;
+#[cfg(target_family = "wasm")]
+use web_time::Instant;
 
 #[allow(dead_code)]
 struct Actor0([u8; 0]);

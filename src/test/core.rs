@@ -1,6 +1,10 @@
 use crate::*;
 use std::rc::Rc;
-use std::time::{Duration, Instant, SystemTime};
+use std::time::Duration;
+#[cfg(not(target_family = "wasm"))]
+use std::time::{Instant, SystemTime};
+#[cfg(target_family = "wasm")]
+use web_time::{Instant, SystemTime};
 
 test_fn!(
     fn test_times() {

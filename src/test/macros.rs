@@ -7,7 +7,11 @@ use crate::{
 };
 use std::cell::RefCell;
 use std::rc::Rc;
-use std::time::{Duration, Instant};
+use std::time::Duration;
+#[cfg(not(target_family = "wasm"))]
+use std::time::Instant;
+#[cfg(target_family = "wasm")]
+use web_time::Instant;
 
 #[derive(Clone)]
 struct Scores(Rc<RefCell<[u8; 100]>>);

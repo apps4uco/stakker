@@ -3,7 +3,10 @@ use crate::*;
 use std::cell::RefCell;
 use std::pin::Pin;
 use std::rc::Rc;
+#[cfg(not(target_family = "wasm"))]
 use std::time::Instant;
+#[cfg(target_family = "wasm")]
+use web_time::Instant;
 
 // This tests the Task mechanism, but without needing async/await
 test_fn!(

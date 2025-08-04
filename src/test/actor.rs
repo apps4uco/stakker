@@ -1,6 +1,10 @@
 use crate::actor::StringError;
 use crate::*;
-use std::time::{Duration, Instant};
+use std::time::Duration;
+#[cfg(not(target_family = "wasm"))]
+use std::time::Instant;
+#[cfg(target_family = "wasm")]
+use web_time::Instant;
 
 test_fn!(
     fn actor_termination() {

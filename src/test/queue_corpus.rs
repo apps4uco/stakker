@@ -1,5 +1,8 @@
 use crate::*;
+#[cfg(not(target_family = "wasm"))]
 use std::time::Instant;
+#[cfg(target_family = "wasm")]
+use web_time::Instant;
 
 // This uses a snapshot of a small fuzzing corpus that gives full
 // coverage of queue operations in `cargo fuzz`

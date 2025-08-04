@@ -7,7 +7,10 @@ use crate::*;
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::{Arc, Condvar, Mutex};
 use std::time::Duration;
+#[cfg(not(target_family = "wasm"))]
 use std::time::Instant;
+#[cfg(target_family = "wasm")]
+use web_time::Instant;
 
 /// Simple channel for sending and waiting for notification events.
 /// Returns (send, recv) closures.  This means that we can simulate a

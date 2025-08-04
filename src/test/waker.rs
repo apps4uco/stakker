@@ -13,7 +13,10 @@ use std::collections::HashSet;
 use std::rc::Rc;
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Arc;
+#[cfg(not(target_family = "wasm"))]
 use std::time::Instant;
+#[cfg(target_family = "wasm")]
+use web_time::Instant;
 
 // Test it all in one thread so that we have total control over the
 // order of operations, to exercise many combinations but reliably and
